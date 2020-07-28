@@ -1,0 +1,30 @@
+{
+  "name": "here-is-vue",
+  "version": "1.0.0",
+  "main": "rollup.config.js",
+  "description": "解析 Vue 源码",
+  "scripts": {
+    "build:dev": "rollup -c",
+    "serve": "cross-env NODE_ENV=development rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dawnight/here-is-vue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dawnight/here-is-vue/issues"
+  },
+  "homepage": "https://github.com/dawnight/here-is-vue#readme",
+
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "cross-env": "^7.0.2",
+    "rollup": "^2.23.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-serve": "^1.0.3"
+  }
+}

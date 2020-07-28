@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Here is vue</title>
+    <script src="/dist/umd/vue.js"></script>
+</head>
+<body>
+<script>
+  let vm = new Vue({
+    el: '#app',
+
+    data() {
+      return {
+        name: 'jack',
+        age: 19,
+        address: {
+          beijing: {
+            street: '朝外大街'
+          },
+          shanghai: {
+            street: '世纪大道'
+          }
+        },
+        users: [{name: 'jack'}, 'tom']
+      };
+    }
+
+  });
+  console.log(vm);
+</script>
+</body>
+</html>
