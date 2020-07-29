@@ -2,7 +2,6 @@ import {observe} from './observe/index';
 
 export function initState(vm) {
   const opts = vm.$options;
-  console.log('opts', opts);
 
   if (opts.props) {
     initProps(vm);
@@ -35,7 +34,6 @@ function initMethod(vm) {
 }
 
 function initData(vm) {
-  console.log('initData fn', vm.$options.data);
   let data = vm.$options.data;
   data = typeof data === 'function' ? data.call(vm) : data;
   vm._data = data;

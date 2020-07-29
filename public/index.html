@@ -6,28 +6,18 @@
     <script src="/dist/umd/vue.js"></script>
 </head>
 <body>
+<div id="app" style="color: red; background: orange;" data-id="app">
+    <p>hello {{ name }}</p>
+</div>
 <script>
-  let vm = new Vue({
+  new Vue({
     el: '#app',
-
     data() {
       return {
-        name: 'jack',
-        age: 19,
-        address: {
-          beijing: {
-            street: '朝外大街'
-          },
-          shanghai: {
-            street: '世纪大道'
-          }
-        },
-        users: [{name: 'jack'}, 'tom']
+        name: 'jack'
       };
     }
-
   });
-  console.log(vm);
 </script>
 </body>
 </html>
