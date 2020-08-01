@@ -1,4 +1,5 @@
 import {observe} from './observe/index';
+import {proxy}from './util/index';
 
 export function initState(vm) {
   const opts = vm.$options;
@@ -39,6 +40,11 @@ function initData(vm) {
   vm._data = data;
   // 劫持数据对象
   observe(data);
+
+  for (let key in data) {
+    proxy(vm, '_data', key);
+  }
+
 }
 
 function initComputed(vm) {

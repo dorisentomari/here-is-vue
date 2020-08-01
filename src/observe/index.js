@@ -1,13 +1,11 @@
-import {isObject, def} from "../util/index";
+import {isObject, def} from '../util/index';
 import {arrayMethods} from './array';
-
 
 class Observer {
   constructor(value) {
     if (Array.isArray(value)) {
       def(value, '__ob__', this);
       value.__proto__ = arrayMethods;
-
       this.observerArray(value);
     } else {
       this.walk(value);
@@ -43,9 +41,8 @@ function defineReactive(data, key, value) {
       }
       value = newValue;
     }
-  })
+  });
 }
-
 
 export function observe(data) {
   if (!isObject(data)) {

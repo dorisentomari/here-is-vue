@@ -1,5 +1,5 @@
 // 匹配类似 abc-abc 的字符串
-const ncname = `[a-zA-Z_][\\-\\.0-9_a-zA-Z]*`;
+const ncname = '[a-zA-Z_][\\-\\.0-9_a-zA-Z]*';
 // ?: 匹配不捕获
 // 匹配 <aaa:abc> 里的 aaa:abc
 const qnameCapture = `((?:${ncname}\\:)?${ncname})`;
@@ -7,7 +7,7 @@ const startTagOpen = new RegExp(`^<${qnameCapture}`); // 标签开头的正则 �
 const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`); // 匹配标签结尾的 </div>
 const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/; // 匹配属性的
 const startTagClose = /^\s*(\/?)>/; // 匹配标签结束的 >
-export const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g
+export const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g;
 
 // ast 语法树的根
 let root = null;
@@ -25,7 +25,7 @@ function createASTElement(tagName, attrs) {
     type: ELEMENT_TYPE,
     children: [],
     parent: null
-  }
+  };
 }
 
 function start(tagName, attrs) {

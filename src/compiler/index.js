@@ -1,4 +1,4 @@
-import {defaultTagRE, parseHTML} from "./parseHTML";
+import {defaultTagRE, parseHTML} from './parseHTML';
 
 function genProps(attrs) {
   let str = '';
@@ -34,7 +34,7 @@ function gen(node) {
       lastIndex = index + match[0].length;
     }
     if (lastIndex < text.length) {
-      tokens.push(JSON.stringify(text.slice(lastIndex)))
+      tokens.push(JSON.stringify(text.slice(lastIndex)));
     }
     return `_v(${tokens.join('+')})`;
   }
@@ -43,7 +43,7 @@ function gen(node) {
 function genChildren(el) {
   let children = el.children;
   if (children && children.length > 0) {
-    return `${children.map(child => gen(child)).join(',')}`
+    return `${children.map(child => gen(child)).join(',')}`;
   } else {
     return false;
   }
@@ -59,7 +59,5 @@ function generate(el) {
 export function compileToFunction(template) {
   let root = parseHTML(template);
   let code = generate(root);
-  let renderFn = new Function(`with(this){return ${code}}`);
-  console.log('renderFn',renderFn);
-  return renderFn;
+  return new Function(`with(this){return ${code}}`);
 }
