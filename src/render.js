@@ -1,13 +1,13 @@
-import {createElement, createTextNode} from "./vdom/createElement";
+import {createElement, createTextNode} from './vdom/createElement';
 
 export function renderMixin(Vue) {
   Vue.prototype._c = function () {
     return createElement(...arguments);
-  }
+  };
 
   Vue.prototype._v = function (text) {
     return createTextNode(text);
-  }
+  };
 
   Vue.prototype._s = function (text) {
     if (typeof text === 'object' && text !== null) {
@@ -16,11 +16,10 @@ export function renderMixin(Vue) {
       return text;
     }
     return '';
-  }
+  };
 
 
   Vue.prototype._render = function () {
-    console.log('renderMixin');
     const vm = this;
     const {render} = vm.$options;
 

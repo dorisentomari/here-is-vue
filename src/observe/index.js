@@ -1,5 +1,6 @@
-import {isObject, def} from '../util/index';
+import {def, isObject} from '../util/index';
 import {arrayMethods} from './array';
+import Dep from './dep';
 
 class Observer {
   constructor(value) {
@@ -29,17 +30,24 @@ class Observer {
 }
 
 function defineReactive(data, key, value) {
+  let dep = new Dep();
   observe(value);
   Object.defineProperty(data, key, {
     get() {
+      console.log('取值', key, value);
+      // 如果当前有 watcher
+      if (Dep.target) {
+        dep.depend(); // 将 watcher 存储起来
+      }
       return value;
     },
     set(newValue) {
-      console.log('更新数据', key, value, newValue);
+      console.log('设置值', key, newValue);
       if (newValue === value) {
         return;
       }
       value = newValue;
+      dep.notify(); // 通知依赖的 watcher 进行更新操作
     }
   });
 }

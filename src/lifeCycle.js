@@ -5,8 +5,7 @@ export function mountComponent(vm, el) {
   const options = vm.$options;
   vm.$el = el;
 
-  console.log('vm');
-  console.log(vm);
+  callHook(vm, 'beforeMount');
   // 渲染页面和更新页面
   let updateComponent = () => {
     // 返回虚拟 dom
@@ -18,15 +17,23 @@ export function mountComponent(vm, el) {
   // true 表示是一个渲染 watcher
   new Watcher(vm, updateComponent, () => {
   }, true);
-
+  callHook(vm, 'mounted');
 }
 
 export function lifeCycleMixin(Vue) {
   Vue.prototype._update = function (vnode) {
-    console.log('lifeCycleMixin');
     const vm = this;
     // 用虚拟界定创建出真实节点，替换掉真实的 $el
     vm.$el = patch(vm.$el, vnode);
 
   };
+}
+
+export function callHook(vm, hook) {
+  const handlers = vm.$options[hook];
+  if (handlers) {
+    for (let i = 0; i < handlers.length; i++) {
+      handlers[i].call(vm);
+    }
+  }
 }

@@ -14,16 +14,23 @@
     </ul>
 </div>
 <script>
- let vm =  new Vue({
+  let vm = new Vue({
     el: '#app',
     data() {
       return {
         name: 'jack',
         home: 'shanghai',
-        address: 'shijidadao'
+        address: {
+          aaa: 'sssssss'
+        }
       };
     }
   });
+
+  setTimeout(() => {
+    vm.name = 'tom';
+  }, 1000);
+
 </script>
 </body>
 </html>
