@@ -1,4 +1,4 @@
-let id = 0
+let id = 0;
 
 class Dep {
 
@@ -8,11 +8,17 @@ class Dep {
   }
 
   depend() {
-    this.subs.push(Dep.target);
+    if (Dep.target) {
+      Dep.target.addDep(this);
+    }
   }
 
   notify() {
     this.subs.forEach(watcher => watcher.update());
+  }
+
+  addSub(watcher) {
+    this.subs.push(watcher);
   }
 
 }

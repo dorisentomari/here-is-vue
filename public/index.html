@@ -11,6 +11,7 @@
     <ul class="list">
         <li>home:{{ home }}</li>
         <li>address:{{ address }}</li>
+        <li>{{ nums }}</li>
     </ul>
 </div>
 <script>
@@ -22,14 +23,21 @@
         home: 'shanghai',
         address: {
           aaa: 'sssssss'
-        }
+        },
+        nums: [1,2,3]
       };
     }
   });
 
-  setTimeout(() => {
-    vm.name = 'tom';
-  }, 1000);
+  // setTimeout(() => {
+  //   vm.name = 'tom';
+  //   vm.nums.push(4);
+  // }, 1000);
+
+  vm.$nextTick = function () {
+    console.log('sss');
+    console.log(vm.$el);
+  }
 
 </script>
 </body>

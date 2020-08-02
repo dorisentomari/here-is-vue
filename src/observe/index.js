@@ -4,6 +4,7 @@ import Dep from './dep';
 
 class Observer {
   constructor(value) {
+    this.dep = new Dep();
     if (Array.isArray(value)) {
       def(value, '__ob__', this);
       value.__proto__ = arrayMethods;
@@ -31,21 +32,27 @@ class Observer {
 
 function defineReactive(data, key, value) {
   let dep = new Dep();
-  observe(value);
+  let childObserve = observe(value);
   Object.defineProperty(data, key, {
     get() {
-      console.log('取值', key, value);
       // 如果当前有 watcher
       if (Dep.target) {
         dep.depend(); // 将 watcher 存储起来
+        if (childObserve) {
+          childObserve.dep.depend();
+          // 如果数组中还有数组
+          if (Array.isArray(value)) {
+            dependArray(value);
+          }
+        }
       }
       return value;
     },
     set(newValue) {
-      console.log('设置值', key, newValue);
       if (newValue === value) {
         return;
       }
+      observe(newValue);
       value = newValue;
       dep.notify(); // 通知依赖的 watcher 进行更新操作
     }
@@ -57,4 +64,14 @@ export function observe(data) {
     return;
   }
   return new Observer(data);
+}
+
+function dependArray(value) {
+  for (let i = 0; i < value.length; i++) {
+    let current = value[i];
+    current.__ob__ && current.__ob__.dep.depend();
+    if (Array.isArray(current)) {
+      dependArray(current);
+    }
+  }
 }

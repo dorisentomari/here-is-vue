@@ -14,9 +14,10 @@ const methods = [
 
 methods.forEach(method => {
   arrayMethods[method] = function (...args) {
-    oldArrayMethods[method].apply(this, args);
+    const result = oldArrayMethods[method].apply(this, args);
     let inserted;
     const ob = this.__ob__;
+
     switch (method) {
       case 'push':
       case 'unshift':
@@ -27,8 +28,11 @@ methods.forEach(method => {
       default:
         break;
     }
-    if(inserted) {
+
+    if (inserted) {
       ob.observerArray(inserted);
     }
+    ob.dep.notify();
+    return result;
   };
 });
