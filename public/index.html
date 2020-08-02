@@ -26,18 +26,21 @@
         },
         nums: [1,2,3]
       };
+    },
+    components: {
+      world: {
+        template: '<div>world</div>'
+      }
     }
   });
 
-  // setTimeout(() => {
-  //   vm.name = 'tom';
-  //   vm.nums.push(4);
-  // }, 1000);
+  Vue.component('hello', {
+    template: '<div>hello</div>'
+  });
 
-  vm.$nextTick = function () {
-    console.log('sss');
-    console.log(vm.$el);
-  }
+  console.log(vm);
+  console.log(Vue);
+
 
 </script>
 </body>

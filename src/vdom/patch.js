@@ -11,10 +11,23 @@ export function patch(oldVnode, vnode) {
   }
 }
 
+function createComponent(vnode) {
+  let i = vnode.data;
+  if ((i = i.hook) && (i = i.init)) {
+    i(vnode);
+  }
+  console.log('createComponent vnode', vnode);
+}
+
 // 根据虚拟节点创建真实节点
 function createElm(vnode) {
   let {tag, data, key, children, text} = vnode;
   if (typeof tag === 'string') {
+    if (createComponent(vnode)) {
+      return;
+    }
+
+
     vnode.el = document.createElement(tag);
     updateProperties(vnode);
     children.map(child => {
